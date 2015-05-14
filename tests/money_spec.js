@@ -64,8 +64,20 @@ describe("VanillaMasker.toMoney", function() {
     expect(VMasker.toMoney(1000, {precision: 0})).toEqual('1.000');
   });
 
-  it('returns R$ 10.000,00 when unit is R$', function() {
-    expect(VMasker.toMoney(10000000000, {unit: 'R$'})).toEqual('R$ 100.000.000,00');
+  it('returns R$10.000,00 when unit is R$', function() {
+    expect(VMasker.toMoney(10000000000, {unit: 'R$'})).toEqual('R$100.000.000,00');
+  });
+
+  it('returns R$ 10.000,00 when unit is "R$ "', function() {
+    expect(VMasker.toMoney(10000000000, {unit: 'R$ '})).toEqual('R$ 100.000.000,00');
+  });
+
+  it('returns 10.000,00R$ when suffixUnit is R$', function() {
+    expect(VMasker.toMoney(10000000000, {suffixUnit: 'R$'})).toEqual('100.000.000,00R$');
+  });
+
+  it('returns 10.000,00 R$ when suffixUnit is "R$ "', function() {
+    expect(VMasker.toMoney(10000000000, {suffixUnit: ' R$'})).toEqual('100.000.000,00 R$');
   });
 
   it('returns 100,000,000,00 when delimiter is ","', function() {
